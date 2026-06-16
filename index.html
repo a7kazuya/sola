@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>○○塾 - 知ることの喜びを、もう一度</title>
+<style>
+  :root {
+    --color-blue-deep: #042C53;
+    --color-blue-strong: #185FA5;
+    --color-blue-mid: #378ADD;
+    --color-blue-light: #B5D4F4;
+    --color-blue-pale: #E6F1FB;
+    --color-bg-cafe: #FAF7F0;
+    --color-bg-cafe-2: #F3EDE2;
+    --color-text-main: #444441;
+    --color-text-sub: #5F5E5A;
+    --color-text-hint: #888780;
+    --color-border: #D3D1C7;
+    --font-serif: "游明朝", "Yu Mincho", "ヒラギノ明朝 ProN", "Hiragino Mincho ProN", serif;
+    --font-sans: "ヒラギノ角ゴ ProN", "Hiragino Kaku Gothic ProN", "メイリオ", Meiryo, sans-serif;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: var(--font-sans);
+    color: var(--color-text-main);
+    background: var(--color-bg-cafe);
+    line-height: 1.8;
+    font-size: 16px;
+  }
+
+  .page {
+    max-width: 720px;
+    margin: 0 auto;
+    background: var(--color-bg-cafe);
+    box-shadow: 0 0 24px rgba(0,0,0,0.04);
+  }
+
+  section {
+    padding: 56px 32px;
+  }
+
+  .eyebrow {
+    font-size: 13px;
+    color: var(--color-text-sub);
+    letter-spacing: 0.08em;
+    margin-bottom: 10px;
+  }
+
+  h2 {
+    font-family: var(--font-serif);
+    font-size: 22px;
+    font-weight: 500;
+    color: var(--color-blue-deep);
+    margin-bottom: 22px;
+  }
+
+  p { font-size: 15px; }
+
+  /* ヒーロー */
+  .hero {
+    background: var(--color-blue-pale);
+    text-align: center;
+    padding: 64px 32px 80px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .balloon {
+    position: absolute;
+    width: 36px;
+    height: 44px;
+  }
+  .balloon svg { width: 100%; height: 100%; }
+  .balloon-1 { top: 28px; left: 28px; transform: rotate(-8deg); }
+  .balloon-2 { top: 70px; right: 40px; width: 26px; height: 32px; transform: rotate(10deg); }
+
+  .hero .eyebrow {
+    font-family: var(--font-serif);
+    color: var(--color-blue-strong);
+    font-size: 14px;
+  }
+
+  .hero h1 {
+    font-family: var(--font-serif);
+    font-size: 32px;
+    font-weight: 500;
+    color: var(--color-blue-deep);
+    margin: 8px 0 20px;
+  }
+
+  .hero .lead {
+    color: var(--color-text-sub);
+    max-width: 420px;
+    margin: 0 auto;
+  }
+
+  /* 教室の意義 */
+  .significance { background: var(--color-bg-cafe); }
+
+  /* 料金 */
+  .pricing { background: var(--color-bg-cafe-2); }
+
+  .price-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+  }
+
+  .price-card {
+    background: #FFFFFF;
+    border: 0.5px solid var(--color-border);
+    border-radius: 10px;
+    padding: 20px 14px;
+    text-align: center;
+  }
+
+  .price-card.featured {
+    border: 2px solid var(--color-blue-mid);
+  }
+
+  .badge {
+    display: inline-block;
+    font-size: 11px;
+    background: var(--color-blue-pale);
+    color: var(--color-blue-strong);
+    padding: 2px 10px;
+    border-radius: 8px;
+    margin-bottom: 8px;
+  }
+
+  .price-card .course-name {
+    font-size: 13px;
+    color: var(--color-text-sub);
+    margin-bottom: 8px;
+  }
+
+  .price-card .price {
+    font-size: 22px;
+    font-weight: 500;
+    color: var(--color-blue-strong);
+  }
+
+  /* 受講者の声 */
+  .voices { background: var(--color-bg-cafe); }
+
+  .voice-card {
+    background: #FFFFFF;
+    border: 0.5px solid var(--color-border);
+    border-radius: 10px;
+    padding: 18px 20px;
+    margin-bottom: 14px;
+  }
+
+  .voice-card p.quote {
+    font-style: italic;
+    margin-bottom: 8px;
+  }
+
+  .voice-card .who {
+    font-size: 13px;
+    color: var(--color-text-hint);
+  }
+
+  /* メッセージ（更新エリア） */
+  .message-section { background: var(--color-blue-pale); }
+
+  .message-eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--color-blue-strong);
+    font-size: 13px;
+    letter-spacing: 0.05em;
+    margin-bottom: 6px;
+  }
+
+  .message-date {
+    font-size: 13px;
+    color: var(--color-text-sub);
+    margin-bottom: 14px;
+  }
+
+  .message-box {
+    background: #FFFFFF;
+    border: 0.5px solid var(--color-blue-light);
+    border-radius: 10px;
+    padding: 20px 22px;
+  }
+
+  .message-box p {
+    color: var(--color-blue-deep);
+    margin: 0;
+  }
+
+  /* アクセス */
+  .access { background: var(--color-bg-cafe); }
+
+  .map-placeholder {
+    background: var(--color-border);
+    border-radius: 10px;
+    height: 140px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-text-sub);
+    margin-bottom: 14px;
+    font-size: 14px;
+  }
+
+  footer {
+    text-align: center;
+    padding: 28px;
+    font-size: 13px;
+    color: var(--color-text-hint);
+    background: var(--color-bg-cafe-2);
+  }
+
+  @media (max-width: 480px) {
+    section { padding: 40px 22px; }
+    .price-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<div class="page">
+
+  <!-- ヒーロー -->
+  <section class="hero">
+    <div class="balloon balloon-1">
+      <svg viewBox="0 0 36 44"><ellipse cx="18" cy="18" rx="16" ry="18" fill="#85B7EB"/><line x1="18" y1="36" x2="18" y2="44" stroke="#5F5E5A" stroke-width="1"/></svg>
+    </div>
+    <div class="balloon balloon-2">
+      <svg viewBox="0 0 26 32"><ellipse cx="13" cy="13" rx="11" ry="13" fill="#B5D4F4"/><line x1="13" y1="26" x2="13" y2="32" stroke="#5F5E5A" stroke-width="1"/></svg>
+    </div>
+    <p class="eyebrow">いつからでも、学びはじまる</p>
+    <h1>○○塾</h1>
+    <p class="lead">知ることの喜びを、もう一度。<br>同じ時を生きる仲間と、ゆっくり学ぶ場所です。</p>
+  </section>
+
+  <!-- 教室の意義 -->
+  <section class="significance">
+    <p class="eyebrow">教室の意義</p>
+    <h2>なぜ、いま学ぶのか</h2>
+    <p>定年も子育ても終え、自分の時間を取り戻したいま。知的な好奇心を持ち続けることは、人生をより深く、より豊かにします。当塾は、知識を得ることそのものを目的とした、大人のための学びの場です。</p>
+  </section>
+
+  <!-- 料金体系 -->
+  <section class="pricing">
+    <p class="eyebrow">料金体系</p>
+    <h2>コースと月会費</h2>
+    <div class="price-grid">
+      <div class="price-card">
+        <p class="course-name">月2回コース</p>
+        <p class="price">¥6,000</p>
+      </div>
+      <div class="price-card featured">
+        <span class="badge">人気</span>
+        <p class="course-name">月4回コース</p>
+        <p class="price">¥10,000</p>
+      </div>
+      <div class="price-card">
+        <p class="course-name">個別指導</p>
+        <p class="price">¥15,000</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 受講者の声 -->
+  <section class="voices">
+    <p class="eyebrow">受講者の声</p>
+    <h2>通われている方の言葉</h2>
+    <div class="voice-card">
+      <p class="quote">「何十年ぶりかで歴史を学び直し、新しい視点に出会えました。」</p>
+      <p class="who">70代・男性</p>
+    </div>
+    <div class="voice-card">
+      <p class="quote">「先生のお話が深く、毎回終わるのが惜しいくらいです。」</p>
+      <p class="who">60代・女性</p>
+    </div>
+  </section>
+
+  <!-- 教室からのメッセージ（content.jsonから読み込み） -->
+  <section class="message-section">
+    <p class="message-eyebrow">教室からのメッセージ</p>
+    <p class="message-date" id="message-date">読み込み中...</p>
+    <div class="message-box">
+      <p id="message-body">読み込み中...</p>
+    </div>
+  </section>
+
+  <!-- アクセス -->
+  <section class="access">
+    <p class="eyebrow">アクセス</p>
+    <h2>教室の場所</h2>
+    <div class="map-placeholder">地図（後で埋め込み）</div>
+    <p>広島県広島市○○区○○町1-2-3<br>最寄り：○○駅より徒歩5分</p>
+  </section>
+
+  <footer>
+    &copy; 2026 ○○塾
+  </footer>
+
+</div>
+
+<script>
+  // content.json を読み込んで「教室からのメッセージ」だけ動的に差し替える
+  // これにより、コードを編集せずに content.json の文章だけ書き換えれば更新できる
+  fetch('content.json')
+    .then(response => response.json())
+    .then(data => {
+      document.getElementById('message-date').textContent = data.message.date + ' 更新';
+      document.getElementById('message-body').textContent = data.message.body;
+    })
+    .catch(error => {
+      // content.json が見つからない場合（ファイルを直接ダブルクリックして開いた場合など）の代替表示
+      document.getElementById('message-date').textContent = '更新日未取得';
+      document.getElementById('message-body').textContent = 'メッセージを読み込めませんでした。content.json をご確認ください。';
+      console.error('content.json の読み込みに失敗しました:', error);
+    });
+</script>
+
+</body>
+</html>
