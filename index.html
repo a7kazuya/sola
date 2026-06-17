@@ -54,6 +54,39 @@
     left: 32px;
   }
 
+  /* ===== 背景に浮かび上がるメッセージ =====
+     ロゴ(header-inner)とは別の位置（画面の上下中央）に配置し、
+     ページが開いた瞬間に、霧の中から像が現れるように、ゆっくりと浮かび上がる演出をつける。
+     opacity（透明度）と filter: blur（ぼかし）を、同時に変化させることで、
+     「ぼんやり・霧がかかった状態」から「はっきり見える状態」への変化を作る。
+  */
+  .header-message {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #FFFFFF;
+    font-family: var(--font-serif);
+    font-size: 40px;
+    letter-spacing: 0.12em;
+    text-shadow: 0 4px 20px rgba(0,0,0,0.7);
+    white-space: nowrap;
+    opacity: 0;
+    filter: blur(16px);
+    animation: fadeUpMessage 3.5s ease-out 0.3s forwards;
+  }
+
+  @keyframes fadeUpMessage {
+    to {
+      opacity: 1;
+      filter: blur(0px);
+    }
+  }
+
+  @media (max-width: 480px) {
+    .header-message { font-size: 26px; white-space: normal; width: 90%; text-align: center; }
+  }
+
   /* ===== ヘッダー：太田市サイトの左上ロゴ部分に相当 =====
      背景画像は、下記のbackground-imageの値を、実際の写真ファイルのパスに
      置き換えるだけで差し替えられます。例: url('images/header-photo.jpg')
@@ -80,26 +113,68 @@
     margin-right: calc(50% - 50vw);
   }
 
-  header p {
-    font-family: var(--font-serif);
-    font-size: 18px;
-    letter-spacing: 0.05em;
+  .header-inner p {
+    font-family: "游ゴシック", "Yu Gothic", "ヒラギノ角ゴ ProN", "Hiragino Kaku Gothic ProN", sans-serif;
     color: #1A1A1A;
-    background: rgba(255,255,255,0.35);
-    border: 1px solid rgba(255,255,255,0.6);
-    width: 110px;
-    height: 110px;
-    border-radius: 50%;
+    background: rgba(255,255,255,0.78);
+    border: 1px solid rgba(255,255,255,0.9);
+    width: 150px;
+    height: 100px;
+    border-radius: 12px;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     text-align: center;
+  }
+
+  /* 1行目「PCサロン」：通常の太さ */
+  .header-line1 {
+    font-size: 19px;
+    font-weight: 400;
+    letter-spacing: 0.05em;
+  }
+
+  /* 2行目「Sola」：サイズを上げて主役として見せる（太字は使わない） */
+  .header-line2 {
+    font-size: 25px;
+    font-weight: 400;
+    letter-spacing: 0.03em;
+    margin-top: 2px;
   }
 
   /* ===== NEWS：日付＋タイトルだけの、最小限の一覧 ===== */
   .news {
     padding: 28px 24px;
     border-bottom: 1px solid var(--color-border-light);
+  }
+
+  /* ===== メニュー（ナビゲーション）：このサイトの「装飾を引く」方向性に合わせ、
+     背景色・枠・下線を一切使わず、文字とその間の余白だけで構成する =====
+  */
+  nav {
+    padding: 18px 24px 0;
+    display: flex;
+    justify-content: center;
+    gap: 28px;
+    flex-wrap: wrap;
+  }
+
+  nav a {
+    font-family: "游ゴシック", "Yu Gothic", "ヒラギノ角ゴ ProN", "Hiragino Kaku Gothic ProN", sans-serif;
+    font-weight: 400;
+    font-size: 17px;
+    letter-spacing: 0.05em;
+    color: var(--color-text);
+    text-decoration: none;
+  }
+
+  nav a:hover {
+    color: var(--color-text-sub);
+  }
+
+  @media (max-width: 480px) {
+    nav { gap: 16px; padding: 16px 16px 0; }
   }
 
   .news h2 {
@@ -199,9 +274,18 @@
 
   <header>
     <div class="header-inner">
-      <p>○○塾</p>
+      <p><span class="header-line1">PCサロン</span><span class="header-line2">Sola</span></p>
     </div>
+    <p class="header-message">知を愛する大人来たれ</p>
   </header>
+
+  <nav>
+    <a href="index.html">HOME</a>
+    <a href="courses.html">受講システム</a>
+    <a href="voices.html">声</a>
+    <a href="access.html">アクセス</a>
+    <a href="contact.html">お問い合わせ</a>
+  </nav>
 
   <section class="news">
     <h2>NEWS</h2>
