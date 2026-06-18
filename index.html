@@ -90,11 +90,11 @@
     }
   }
 
-  @media (max-width: 600px) {
+  @media (max-width: 768px) {
     .header-message { font-size: 20px; white-space: normal; width: 90%; text-align: center; }
 
     /* スマートフォンでは、PC用ロゴ(左上)を隠し、
-       モバイル用ロゴ(右下)だけを表示する。 */
+       モバイル用ロゴ(下部中央)だけを表示する。 */
     .header-inner {
       display: none;
     }
@@ -133,19 +133,21 @@
   /* PC用ロゴ：header-innerの位置（左上）にそのまま画像として表示する */
   .logo-pc {
     display: block;
-    height: 112px;
+    height: 150px;
     width: auto;
   }
 
   /* モバイル用ロゴ：通常時（PC幅）は表示しない。
-     画面右下に、中央のメッセージ(header-message)より一段小さい
-     存在感で配置するため、絶対座標で右下を指定する。 */
+     画面下部の中央に、控えめなサイズで配置する。
+     left: 50% と transform: translateX(-50%) の組み合わせで、
+     要素の中心を画面の中心に正確に揃える。 */
   .logo-mobile {
     display: none;
     position: absolute;
-    bottom: 16px;
-    right: 16px;
-    height: 22px;
+    bottom: 14px;
+    left: 50%;
+    transform: translateX(-50%);
+    height: 18px;
     width: auto;
   }
 
