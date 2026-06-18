@@ -99,7 +99,7 @@
       display: none;
     }
 
-    .logo-mobile {
+    .logo-mobile-wrap {
       display: block;
     }
   }
@@ -137,17 +137,24 @@
     width: auto;
   }
 
-  /* モバイル用ロゴ：通常時（PC幅）は表示しない。
-     画面下部の中央に、控えめなサイズで配置する。
-     left: 50% と transform: translateX(-50%) の組み合わせで、
-     要素の中心を画面の中心に正確に揃える。 */
-  .logo-mobile {
+  /* モバイル用ロゴの背景パネル：通常時（PC幅）は表示しない。
+     画面下部の中央に、半透明の白パネルとして配置し、
+     ヘッダー写真の上でもロゴの白背景が背景に溶け込まないようにする
+     （header-innerの白いテキストボックスと同じ考え方）。 */
+  .logo-mobile-wrap {
     display: none;
     position: absolute;
     bottom: 14px;
     left: 50%;
     transform: translateX(-50%);
-    height: 28px;
+    background: rgba(255,255,255,0.85);
+    padding: 6px 12px;
+    border-radius: 8px;
+  }
+
+  .logo-mobile {
+    display: block;
+    height: 24px;
     width: auto;
   }
 
@@ -285,7 +292,9 @@
       <img src="images/pc-logo.png" alt="PCサロン Sola" class="logo-pc">
     </div>
     <p class="header-message">知を愛する大人来たれ</p>
-    <img src="images/mobile-logo.png" alt="知を愛する大人のための教室 PCサロン Sola 082-224-4733 Hiroshima-shi Naka-ku" class="logo-mobile">
+    <div class="logo-mobile-wrap">
+      <img src="images/mobile-logo.png" alt="知を愛する大人のための教室 PCサロン Sola 082-224-4733 Hiroshima-shi Naka-ku" class="logo-mobile">
+    </div>
   </header>
 
   <nav>
