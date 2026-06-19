@@ -51,21 +51,20 @@
     padding: 0 24px;
   }
 
-  /* header内の文字を、画像の上に「自由な位置」で重ねて置くための箱
-     position: absolute を使うことで、Wordのテキストボックスのように、
-     画像とは別レイヤーの、自由な座標で配置できる。
-     top/left の数値を変えるだけで、置く場所を自由に調整できる。 */
-  .header-inner {
+  /* ロゴ：JavaScriptが画面幅に応じて位置・画像・サイズを直接切り替える。
+     ここではheader内でposition:absoluteを使えるよう、
+     ベースとなる配置指定のみ記述する。 */
+  #site-logo {
     position: absolute;
-    top: 32px;
-    left: 32px;
+  }
+
+  #site-logo img {
+    display: block;
   }
 
   /* ===== 背景に浮かび上がるメッセージ =====
-     ロゴ(header-inner)とは別の位置（画面の上下中央）に配置し、
+     ロゴとは別の位置（画面の上下中央）に配置し、
      ページが開いた瞬間に、霧の中から像が現れるように、ゆっくりと浮かび上がる演出をつける。
-     opacity（透明度）と filter: blur（ぼかし）を、同時に変化させることで、
-     「ぼんやり・霧がかかった状態」から「はっきり見える状態」への変化を作る。
   */
   .header-message {
     position: absolute;
@@ -92,23 +91,9 @@
 
   @media (max-width: 768px) {
     .header-message { font-size: 20px; white-space: normal; width: 90%; text-align: center; }
-
-    /* スマートフォンでは、PC用ロゴ(左上)を隠し、
-       モバイル用ロゴ(下部中央)だけを表示する。 */
-    .header-inner {
-      display: none;
-    }
-
-    .logo-mobile-wrap {
-      display: block;
-    }
   }
 
-  /* ===== ヘッダー：太田市サイトの左上ロゴ部分に相当 =====
-     背景画像は、下記のbackground-imageの値を、実際の写真ファイルのパスに
-     置き換えるだけで差し替えられます。例: url('images/header-photo.jpg')
-     今は写真がないため、代わりに色のグラデーションで「画像の位置」を示しています。
-  */
+  /* ===== ヘッダー ===== */
   header {
     position: relative;
     height: 360px;
@@ -116,46 +101,9 @@
     background-image: url('images/header-photo-web.jpg');
     background-size: cover;
     background-position: center;
-
-    /* ===== full-bleed（画面端まで広げる）テクニック =====
-       .page という親の箱は max-width: 760px; margin: 0 auto; で
-       中央に制限されているため、その内側にある header も、本来は
-       同じ760pxの幅に閉じ込められてしまう。
-       これを破るために、headerの幅をいったん「画面の幅(100vw)」まで
-       強制的に広げ、左右の位置を、ビューポート(画面)の中心に
-       合わせ直す、という3行のセットがこのテクニックの本体。
-    */
     width: 100vw;
     margin-left: calc(50% - 50vw);
     margin-right: calc(50% - 50vw);
-  }
-
-  /* PC用ロゴ：header-innerの位置（左上）にそのまま画像として表示する */
-  .logo-pc {
-    display: block;
-    height: 150px;
-    width: auto;
-  }
-
-  /* モバイル用ロゴの背景パネル：通常時（PC幅）は表示しない。
-     画面下部の中央に、半透明の白パネルとして配置し、
-     ヘッダー写真の上でもロゴの白背景が背景に溶け込まないようにする
-     （header-innerの白いテキストボックスと同じ考え方）。 */
-  .logo-mobile-wrap {
-    display: none;
-    position: absolute;
-    bottom: 14px;
-    left: 50%;
-    transform: translateX(-50%);
-    background: rgba(255,255,255,0.85);
-    padding: 6px 12px;
-    border-radius: 8px;
-  }
-
-  .logo-mobile {
-    display: block;
-    height: 24px;
-    width: auto;
   }
 
   /* ===== NEWS：日付＋タイトルだけの、最小限の一覧 ===== */
@@ -288,13 +236,10 @@
 <div class="page">
 
   <header>
-    <div class="header-inner">
-      <img src="images/pc-logo.png" alt="PCサロン Sola" class="logo-pc">
+    <div id="site-logo">
+      <img src="images/pc-logo.png" alt="PCサロン Sola" id="logo-img">
     </div>
     <p class="header-message">知を愛する大人来たれ</p>
-    <div class="logo-mobile-wrap">
-      <img src="images/mobile-logo.png" alt="知を愛する大人のための教室 PCサロン Sola 082-224-4733 Hiroshima-shi Naka-ku" class="logo-mobile">
-    </div>
   </header>
 
   <nav>
@@ -341,6 +286,43 @@
   </section>
 
 </div>
+
+<script>
+  function updateLogo() {
+    var wrap = document.getElementById('site-logo');
+    var img  = document.getElementById('logo-img');
+    if (window.innerWidth <= 768) {
+      // モバイル：下部中央、mobile-logo.png
+      wrap.style.position  = 'absolute';
+      wrap.style.bottom    = '14px';
+      wrap.style.top       = '';
+      wrap.style.left      = '50%';
+      wrap.style.transform = 'translateX(-50%)';
+      wrap.style.background   = 'rgba(255,255,255,0.85)';
+      wrap.style.padding      = '6px 12px';
+      wrap.style.borderRadius = '8px';
+      img.src    = 'images/mobile-logo.png';
+      img.style.height = '24px';
+      img.style.width  = 'auto';
+    } else {
+      // PC：左上、pc-logo.png
+      wrap.style.position  = 'absolute';
+      wrap.style.top       = '32px';
+      wrap.style.bottom    = '';
+      wrap.style.left      = '32px';
+      wrap.style.transform = '';
+      wrap.style.background   = '';
+      wrap.style.padding      = '';
+      wrap.style.borderRadius = '';
+      img.src    = 'images/pc-logo.png';
+      img.style.height = '150px';
+      img.style.width  = 'auto';
+    }
+  }
+
+  updateLogo();
+  window.addEventListener('resize', updateLogo);
+</script>
 
 </body>
 </html>
