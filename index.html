@@ -237,10 +237,33 @@
     line-height: 1.7;
   }
 
+  .slide-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10;
+    background: rgba(255,255,255,0.5);
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    font-size: 18px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s;
+  }
+
+  .slide-btn:hover { background: rgba(255,255,255,0.85); }
+  .slide-btn.prev { left: 16px; }
+  .slide-btn.next { right: 16px; }
+
   @media (max-width: 600px) {
     .cards { grid-template-columns: 1fr; }
     .card:not(:nth-child(3n)) { border-right: none; }
     header { height: 240px; }
+    .slide-btn { width: 32px; height: 32px; font-size: 14px; }
   }
 </style>
 </head>
@@ -253,6 +276,8 @@
     <div class="slide" style="background-image:url('images/header-photo-2.jpg')"></div>
     <div class="slide" style="background-image:url('images/header-photo-3.png')"></div>
     <div class="slide" style="background-image:url('images/header-photo-4.jpg');background-position:calc(50% - 50px) center;background-size:110%"></div>
+    <button class="slide-btn prev" id="btn-prev">&#8249;</button>
+    <button class="slide-btn next" id="btn-next">&#8250;</button>
     <div id="site-logo">
       <img src="images/pc-logo.png" alt="PCサロン Sola" id="logo-img">
     </div>
@@ -336,6 +361,7 @@
   // スライドショー（クロスフェード）
   var slideEls = document.querySelectorAll('.slide');
   var current = 0;
+  var timer;
 
   function adjustSlide4() {
     var s = slideEls[3];
@@ -350,14 +376,32 @@
   adjustSlide4();
   window.addEventListener('resize', adjustSlide4);
 
-  setInterval(function() {
+  function goTo(next) {
     var prev = current;
-    current = (current + 1) % slideEls.length;
+    current = (next + slideEls.length) % slideEls.length;
     slideEls[current].classList.add('active');
     setTimeout(function() {
       slideEls[prev].classList.remove('active');
     }, 1200);
-  }, 5000);
+  }
+
+  function startTimer() {
+    timer = setInterval(function() { goTo(current + 1); }, 5000);
+  }
+
+  startTimer();
+
+  document.getElementById('btn-prev').addEventListener('click', function() {
+    clearInterval(timer);
+    goTo(current - 1);
+    startTimer();
+  });
+
+  document.getElementById('btn-next').addEventListener('click', function() {
+    clearInterval(timer);
+    goTo(current + 1);
+    startTimer();
+  });
 </script>
 
 </body>
