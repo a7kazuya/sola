@@ -252,7 +252,7 @@
     <div class="slide active" style="background-image:url('images/header-photo-web.jpg')"></div>
     <div class="slide" style="background-image:url('images/header-photo-2.jpg')"></div>
     <div class="slide" style="background-image:url('images/header-photo-3.png')"></div>
-    <div class="slide" style="background-image:url('images/header-photo-4.jpg');background-position:calc(50% - 80px) center"></div>
+    <div class="slide" style="background-image:url('images/header-photo-4.jpg');background-position:calc(50% - 50px) center;background-size:110%"></div>
     <div id="site-logo">
       <img src="images/pc-logo.png" alt="PCサロン Sola" id="logo-img">
     </div>
@@ -341,8 +341,10 @@
     var s = slideEls[3];
     if (window.innerWidth <= 600) {
       s.style.backgroundPosition = 'center center';
+      s.style.backgroundSize = 'cover';
     } else {
-      s.style.backgroundPosition = 'calc(50% - 80px) center';
+      s.style.backgroundPosition = 'calc(50% - 50px) center';
+      s.style.backgroundSize = '110%';
     }
   }
   adjustSlide4();
