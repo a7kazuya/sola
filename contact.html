@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>お問い合わせ｜PCサロン Sola</title>
+<style>
+  :root {
+    --color-text: #1A1A1A;
+    --color-text-sub: #6B6B6B;
+    --color-border: #1A1A1A;
+    --color-border-light: #D8D8D8;
+    --font-serif: "游明朝", "Yu Mincho", "ヒラギノ明朝 ProN", serif;
+    --font-sans: "ヒラギノ角ゴ ProN", "Hiragino Kaku Gothic ProN", "メイリオ", sans-serif;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: var(--font-sans);
+    color: var(--color-text);
+    background: #FFFFFF;
+    line-height: 1.8;
+    font-size: 15px;
+  }
+
+  .page {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  /* ===== ヘッダー ===== */
+  header {
+    position: relative;
+    height: 360px;
+    border-bottom: 2px solid var(--color-border);
+    background-image: url('images/header-photo-web.jpg');
+    background-size: cover;
+    background-position: center;
+    width: 100vw;
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
+  }
+
+  #site-logo {
+    position: absolute;
+  }
+
+  #site-logo img {
+    display: block;
+  }
+
+  .header-message {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #FFFFFF;
+    font-family: var(--font-serif);
+    font-size: 40px;
+    letter-spacing: 0.12em;
+    text-shadow: 0 4px 20px rgba(0,0,0,0.7);
+    white-space: nowrap;
+    opacity: 0;
+    filter: blur(16px);
+    animation: fadeUpMessage 3.5s ease-out 0.3s forwards;
+  }
+
+  @keyframes fadeUpMessage {
+    to { opacity: 1; filter: blur(0px); }
+  }
+
+  @media (max-width: 768px) {
+    .header-message { font-size: 20px; white-space: normal; width: 90%; text-align: center; }
+  }
+
+  @media (max-width: 600px) {
+    header { height: 240px; }
+  }
+
+  /* ===== ナビ ===== */
+  nav {
+    padding: 18px 24px 0;
+    display: flex;
+    justify-content: center;
+    gap: 28px;
+    flex-wrap: wrap;
+  }
+
+  nav a {
+    font-family: "游ゴシック", "Yu Gothic", "ヒラギノ角ゴ ProN", "Hiragino Kaku Gothic ProN", sans-serif;
+    font-weight: 400;
+    font-size: 17px;
+    letter-spacing: 0.05em;
+    color: var(--color-text);
+    text-decoration: none;
+  }
+
+  nav a:hover { color: #6B6B6B; }
+  nav a.active { border-bottom: 1px solid var(--color-text); padding-bottom: 2px; }
+
+  @media (max-width: 600px) {
+    nav { gap: 16px; padding: 16px 16px 0; }
+  }
+
+  /* ===== ページタイトル ===== */
+  .page-title {
+    padding: 48px 0 32px;
+    border-bottom: 1px solid var(--color-border-light);
+    margin-bottom: 40px;
+  }
+
+  .page-title h1 {
+    font-family: var(--font-serif);
+    font-size: 22px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+  }
+
+  /* ===== フォーム ===== */
+  .contact-form {
+    max-width: 520px;
+    padding-bottom: 80px;
+  }
+
+  .form-group {
+    margin-bottom: 32px;
+  }
+
+  .form-group label {
+    display: block;
+    font-size: 13px;
+    letter-spacing: 0.08em;
+    color: var(--color-text-sub);
+    margin-bottom: 8px;
+  }
+
+  .form-group input,
+  .form-group textarea {
+    width: 100%;
+    border: none;
+    border-bottom: 1px solid var(--color-border);
+    padding: 8px 0;
+    font-family: var(--font-sans);
+    font-size: 15px;
+    color: var(--color-text);
+    background: transparent;
+    outline: none;
+    border-radius: 0;
+  }
+
+  .form-group input:focus,
+  .form-group textarea:focus {
+    border-bottom-color: var(--color-text);
+  }
+
+  .form-group textarea {
+    resize: vertical;
+    min-height: 160px;
+    line-height: 1.8;
+  }
+
+  .submit-btn {
+    display: inline-block;
+    margin-top: 8px;
+    padding: 12px 48px;
+    background: var(--color-text);
+    color: #FFFFFF;
+    font-family: var(--font-sans);
+    font-size: 14px;
+    letter-spacing: 0.1em;
+    border: none;
+    cursor: pointer;
+  }
+
+  .submit-btn:hover {
+    background: #444;
+  }
+</style>
+</head>
+<body>
+
+<div class="page">
+
+  <header>
+    <div id="site-logo">
+      <img src="images/pc-logo.png" alt="PCサロン Sola" id="logo-img">
+    </div>
+    <p class="header-message">知を愛する大人来たれ</p>
+  </header>
+
+  <nav>
+    <a href="index.html">HOME</a>
+    <a href="learn.html">学べる事</a>
+    <a href="courses.html">受講システム</a>
+    <a href="voices.html">声</a>
+    <a href="access.html">アクセス</a>
+    <a href="contact.html" class="active">お問い合わせ</a>
+  </nav>
+
+  <div class="page-title">
+    <h1>お問い合わせ</h1>
+  </div>
+
+  <form class="contact-form" action="https://formspree.io/f/meewyyrd" method="POST">
+    <div class="form-group">
+      <label for="name">お名前</label>
+      <input type="text" id="name" name="name" required placeholder="例：山田 太郎">
+    </div>
+
+    <div class="form-group">
+      <label for="email">メールアドレス</label>
+      <input type="email" id="email" name="email" required placeholder="例：example@gmail.com">
+    </div>
+
+    <div class="form-group">
+      <label for="message">お問い合わせ内容</label>
+      <textarea id="message" name="message" required placeholder="ご質問・ご要望をご記入ください"></textarea>
+    </div>
+
+    <button type="submit" class="submit-btn">送 信</button>
+  </form>
+
+</div>
+
+</body>
+</html>
