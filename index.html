@@ -338,9 +338,12 @@
   var current = 0;
 
   setInterval(function() {
-    slideEls[current].classList.remove('active');
+    var prev = current;
     current = (current + 1) % slideEls.length;
     slideEls[current].classList.add('active');
+    setTimeout(function() {
+      slideEls[prev].classList.remove('active');
+    }, 1200);
   }, 5000);
 </script>
 
